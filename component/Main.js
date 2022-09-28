@@ -12,6 +12,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { gStyle } from "../styles/style";
 import { country } from "../data";
+import Form from "./Form";
 
 export default function Main({ navigation }) {
   const loadScene = () => {
@@ -22,6 +23,18 @@ export default function Main({ navigation }) {
   const closeModal = () => {
     setModalWindow(false);
   };
+  const addArticle = (article)=>{
+    setNews((list)=>{
+      article.key = Math.random().toString()
+    return [
+      article,
+      ...list
+    ]
+    })
+    setModalWindow(false)
+    
+  }
+
   return (
     <View>
       <Modal visible={madalWindow}>
@@ -34,6 +47,7 @@ export default function Main({ navigation }) {
             color="#FF6347"
           />
           <Text style={styles.title}>Форма для добавления статьи </Text>
+          <Form addArticle={addArticle}/>
         </View>
       </Modal>
       <Ionicons
